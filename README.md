@@ -1,79 +1,81 @@
-﻿# River_OpenSource
+# River
 
-River_OpenSource 是一个面向 **高频内存读取场景的网络链路重构实践** 项目，包含 TCP 版本的 `RiverServer` 与 `RiverClient`。  
-项目定位是开源学习与工程研究：关注传输层低时延、并发模型、故障恢复和可观测性，而不是单点功能堆叠。
+*A river of memory data, flowing through low-latency channels.*
 
-## 项目状态
+River is an open-source engineering study focused on **network-path refactoring for high-frequency memory read workloads**, including TCP-based `RiverServer` and `RiverClient`.
+The project emphasizes low latency, concurrency design, fault recovery, and observability over feature stacking.
 
-- 类型：学习/研究型开源项目
-- 平台：Windows（Visual Studio 工程）
-- 主要语言：C/C++
-- 当前重点：TCP 网络层与远程读取链路优化
+## Project Status
 
-## 核心能力
+- Type: learning and research-oriented open-source project
+- Platform: Windows (Visual Studio solutions)
+- Primary language: C/C++
+- Current focus: TCP network layer and remote read-path optimization
 
-- 低时延传输路径：控制面/数据面分离，降低控制请求对数据流的干扰。
-- 并发请求处理：多路复用 + worker 池 + 队列治理，提升高频请求处理能力。
-- READSCATTER 优化：离散读请求批量化、窗口化调度，减少调度开销与等待时间。
-- 连接稳定性增强：会话超时回收、断线重建、状态复位，减少长时运行卡死。
-- 可观测性：分层日志（链路、调用、诊断）便于定位网络层与业务层问题边界。
+## Core Capabilities
 
-## 网络层设计概览
+- Low-latency transport path: control plane and data plane separation to reduce cross-interference.
+- Concurrent request processing: multiplexing + worker pools + queue governance for high request rates.
+- READSCATTER optimization: batched and windowed scatter-read scheduling to reduce overhead and wait time.
+- Connection robustness: session timeout reclamation, reconnection, and state reset for long-run stability.
+- Observability: layered logging (link, API, diagnostics) for fast root-cause isolation.
 
-### 1) 会话建立与认证
+## Network Layer Overview
 
-- 启动连接（bootstrap）和数据连接（session）分阶段建立。
-- 握手阶段协商会话参数（端口、TTL、令牌），随后进入数据传输通道。
-- 会话异常时触发状态回收，回到可重连状态。
+### 1) Session Establishment and Authentication
 
-### 2) 请求/响应模型
+- Bootstrap and session channels are established in stages.
+- Handshake negotiates session parameters (port, TTL, token), then switches to the data channel.
+- Session faults trigger state reclamation and re-enter reconnectable state.
 
-- 请求携带 `RequestID`，响应按 `RequestID` 匹配，支持并发在途请求。
-- 控制类命令与数据类读请求分离处理，避免相互阻塞。
-- 对 `READSCATTER` 场景使用批量封装，降低小包密集下的协议开销。
+### 2) Request/Response Model
 
-### 3) 并发与缓冲策略
+- Requests carry `RequestID`; responses are matched by `RequestID` for concurrent in-flight handling.
+- Control commands and data reads are scheduled separately to avoid mutual blocking.
+- `READSCATTER` traffic uses batching to reduce protocol overhead under small-packet pressure.
 
-- 服务端固定 worker 池，避免频繁创建线程带来的抖动。
-- 发送路径使用队列与缓冲复用，减少重复分配与中间拷贝。
-- 结合 in-flight 深度控制，在吞吐与延迟间做可控平衡。
+### 3) Concurrency and Buffer Strategy
 
-## 目录结构
+- Fixed server worker pools avoid jitter from frequent thread creation.
+- Send paths use queueing and buffer reuse to reduce repeated allocation and intermediate copies.
+- In-flight depth controls tune the balance between throughput and latency.
 
-- `RiverServer/`：服务端工程与核心实现
-- `RiverClient/`：客户端工程与核心实现
+## Repository Layout
 
-## 构建指南
+- `RiverServer/`: server-side solutions and core implementation
+- `RiverClient/`: client-side solutions and core implementation
 
-### 环境要求
+## Build Guide
 
-- Visual Studio 2022（MSVC 工具链）
+### Requirements
+
+- Visual Studio 2022 (MSVC toolchain)
 - Windows SDK
 
-### 典型入口
+### Solution Entry Points
 
-- 服务端：`RiverServer/RiverServerSingleDll.sln`
-- 客户端：`RiverClient/LeechCore.sln`
+- Server: `RiverServer/RiverServerSingleDll.sln`
+- Client: `RiverClient/LeechCore.sln`
 
-### 推荐配置
+### Recommended Configuration
 
 - `x64`
 - `Release`
-- 运行库按部署需求选择（例如 `MT` 静态运行库）
+- Runtime library based on deployment needs (for example static `MT`)
 
-## 与上游关系
+## Upstream Relationship
 
-本项目保留了上游框架中的可复用采集能力，并对网络层进行了系统性再设计。  
-更细的再开发边界和改造点见 [RiverClient/README.md](./RiverClient/README.md)。
+River preserves reusable acquisition abstractions from upstream and performs a systematic redesign of the network layer.
+For implementation boundaries and refactor details, see [RiverClient/README.md](./RiverClient/README.md).
 
-## Roadmap（学习方向）
+## Roadmap
 
-1. 进一步减少请求尾延迟（tail latency）并稳定极端负载。
-2. 完善协议文档与压测基线，形成可复现性能评估流程。
-3. 增强跨版本兼容与故障注入测试。
-4. 持续清理历史路径，降低维护复杂度。
+1. Further reduce tail latency under extreme load.
+2. Complete protocol documentation and reproducible performance baselines.
+3. Strengthen cross-version compatibility and fault-injection testing.
+4. Continue removing legacy paths to lower maintenance complexity.
 
-## 合规声明
+## Compliance Notice
 
-本仓库仅用于系统软件工程、网络协议优化与性能研究。  
-请仅在合法、授权、可控的测试环境中使用与验证。
+This repository is intended for systems engineering, protocol optimization, and performance research.
+Use only in legal, authorized, and controlled environments.

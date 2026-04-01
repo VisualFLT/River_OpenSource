@@ -1,68 +1,70 @@
-﻿# RiverClient (TCP Network Refactor Edition)
+# RiverClient (TCP Network Refactor Edition)
 
-本目录是基于 LeechCore 体系进行再开发的 `RiverClient` 实现，重点不是复制上游功能，而是面向低时延远程读取场景重写客户端网络层与会话管理路径。
+This directory contains a re-engineered `RiverClient` built on top of LeechCore architecture.
+The focus is not feature mirroring, but a low-latency remote-read client path with redesigned transport and session handling.
 
-## 背景与定位
+## Background and Positioning
 
-- 基线来源：LeechCore 的设备抽象与读写接口体系。
-- 再开发重点：远程传输协议、连接管理、并发请求调度、诊断能力。
-- 项目目标：在保持接口可用性的前提下，优化高频读取场景下的实时性与稳定性。
+- Baseline source: LeechCore device abstraction and I/O interface model.
+- Re-engineering focus: remote transport protocol, connection lifecycle, concurrent scheduling, diagnostics.
+- Objective: preserve interface usability while improving real-time behavior and stability for high-frequency reads.
 
-## 主要改造点
+## Main Refactor Areas
 
-### 1) 远程协议入口重构
+### 1) Remote Entry Path Redesign
 
-- 保留 `LeechCore` 风格调用接口（如 `LcRead/LcReadScatter/LcGetOption/LcCommand`）。
-- 将远程链路主路径收敛到 TCP 传输实现，统一会话上下文与请求生命周期。
+- Keep LeechCore-style APIs such as `LcRead`, `LcReadScatter`, `LcGetOption`, and `LcCommand`.
+- Converge remote-path execution to a TCP transport core with unified session context and request lifecycle.
 
-### 2) 会话与连接管理
+### 2) Session and Connection Management
 
-- 引入 bootstrap/session 分阶段连接流程。
-- 支持会话参数协商（端口、TTL、令牌）与连接状态复位。
-- 在断连、超时、重连等场景下做显式状态机治理，降低“假在线”问题。
+- Introduce staged bootstrap/session connection flow.
+- Support negotiation of session parameters (port, TTL, token) and explicit state reset.
+- Apply explicit state-machine handling for disconnect, timeout, and reconnect scenarios to reduce false-online states.
 
-### 3) 请求并发与多路复用
+### 3) Request Concurrency and Multiplexing
 
-- 请求使用 `RequestID` 进行匹配，支持并发在途。
-- 控制请求与数据请求分离调度，减少控制流对数据流的影响。
-- 针对大批量离散读场景优化 `READSCATTER` 路径，提升吞吐稳定性。
+- Match requests by `RequestID` and support multiple in-flight operations.
+- Separate control traffic and data traffic scheduling to reduce cross-path interference.
+- Optimize `READSCATTER` for large discrete-read workloads to improve throughput consistency.
 
-### 4) 传输路径性能优化
+### 4) Transport Path Performance
 
-- 连接复用与发送队列治理，减少阻塞链。
-- 批量化读请求与窗口深度控制，平衡延迟与带宽。
-- 降低频繁分配/拷贝带来的 CPU 与时延开销。
+- Reuse connections and govern send queues to reduce blocking chains.
+- Batch read requests and control in-flight depth to balance latency and bandwidth.
+- Reduce allocation and memory-copy overhead on hot paths.
 
-### 5) 可观测性与诊断
+### 5) Observability and Diagnostics
 
-- 增强客户端链路日志，区分：
-- 连接/握手阶段
-- API 调用阶段
-- 数据读取阶段
-- 诊断阶段
-- 用于快速判断问题属于“网络传输层”还是“上层业务解析层”。
+- Enhance client-side logs with stage-specific visibility.
+- Cover connection and handshake stages.
+- Cover API call and read-path stages.
+- Cover diagnostics stages for failure triage.
+- Improve fault isolation between transport-layer behavior and upper-layer parsing behavior.
 
-## 与上游 LeechCore 的关系说明
+## Relationship to Upstream LeechCore
 
-本项目不是对上游仓库的镜像，也不是一比一替换。当前实现属于“基于 LeechCore 架构的工程化分支”，策略是：
+This is not a mirror of upstream and not a one-to-one drop-in replacement.
+It is an engineering branch derived from LeechCore architecture with the following strategy:
 
-- 复用成熟的设备抽象和基础接口。
-- 对远程网络层进行面向目标场景的定制重写。
-- 在兼容调用方式的同时，优先优化低延迟并发读取链路。
+- Reuse mature acquisition abstractions and baseline interfaces.
+- Redesign the remote network layer for River's low-latency target scenario.
+- Preserve calling semantics where practical while prioritizing concurrent low-latency read paths.
 
-## 构建
+## Build
 
-- 解决方案：`LeechCore.sln`
-- 建议配置：`x64 / Release`
-- 工具链：Visual Studio 2022 + Windows SDK
+- Solution: `LeechCore.sln`
+- Suggested configuration: `x64 / Release`
+- Toolchain: Visual Studio 2022 + Windows SDK
 
-## 适用研究方向
+## Research Directions
 
-- C/C++ 高性能网络客户端重构
-- 会话状态机与异常恢复设计
-- 高并发离散读请求调度优化
-- 传输层可观测性工程实践
+- High-performance C/C++ network-client refactoring
+- Session state-machine and fault-recovery design
+- High-concurrency discrete-read scheduling
+- Transport-layer observability engineering
 
-## 说明
+## Notice
 
-此目录用于学习与研究，不构成任何生产或安全承诺。请在合法、授权环境下使用。
+This directory is intended for study and research use.
+No production or security guarantee is implied.
