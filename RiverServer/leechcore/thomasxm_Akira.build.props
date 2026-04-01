@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <LLVMInstallDir>C:\llvm\thomasxm_Akira</LLVMInstallDir>
+    <LLVMToolsVersion>17.0.6</LLVMToolsVersion>
+    <ExecutablePath>$(LLVMInstallDir)\bin;$(VC_ExecutablePath_x86);$(CommonExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+</Project>

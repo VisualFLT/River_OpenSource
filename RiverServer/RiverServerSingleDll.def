@@ -1,0 +1,23 @@
+LIBRARY RiverServerSingleDll
+
+EXPORTS
+    LcAllocScatter1            @2  NONAME
+    LcAllocScatter2            @3  NONAME
+    LcAllocScatter3            @4  NONAME
+    LcClose                    @5  NONAME
+    LcCommand                  @6  NONAME
+    LcCreate                   @7  NONAME
+    LcCreateEx                 @8  NONAME
+    LcDeviceParameterGet       @9  NONAME
+    LcDeviceParameterGetNumeric @10 NONAME
+    LcGetOption                @11 NONAME
+    LcMemFree                  @12 NONAME
+    LcMemMap_AddRange          @13 NONAME
+    LcMemMap_GetMaxAddress     @14 NONAME
+    LcMemMap_IsInitialized     @15 NONAME
+    LcRead                     @16 NONAME
+    LcReadScatter              @17 NONAME
+    LcSetOption                @18 NONAME
+    LcWrite                    @19 NONAME
+    LcWriteScatter             @20 NONAME
+    LeechSingleDll_GetStatus   @21 NONAME

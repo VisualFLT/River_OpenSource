@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{FE5E61D2-FCF2-427B-B16A-C0AB5C063E40}</ProjectGuid>
+    <RootNamespace>RiverServerSingleDll</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>ClangCL</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros">
+    <LEECHRPC_ENABLE_NATIVE_RPC>0</LEECHRPC_ENABLE_NATIVE_RPC>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>LEECHCORE_SINGLE_DLL_ORDINAL_EXPORTS=1;LEECHRPC_ENABLE_NATIVE_RPC=$(LEECHRPC_ENABLE_NATIVE_RPC);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>$(SolutionDir)files\temp\RiverServerSingleDll\$(PlatformShortName)\</IntDir>
+    <OutDir>$(SolutionDir)files\single_dll\$(PlatformShortName)\</OutDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)leechcore;$(SolutionDir)includes;$(SolutionDir)leechagent;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>$(SolutionDir)files\temp\RiverServerSingleDll\$(PlatformShortName)\</IntDir>
+    <OutDir>$(SolutionDir)files\single_dll\$(PlatformShortName)\</OutDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)leechcore;$(SolutionDir)includes;$(SolutionDir)leechagent;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IntDir>$(SolutionDir)files\temp\RiverServerSingleDll\$(PlatformShortName)\</IntDir>
+    <OutDir>$(SolutionDir)files\single_dll\$(PlatformShortName)\</OutDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)leechcore;$(SolutionDir)includes;$(SolutionDir)leechagent;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IntDir>$(SolutionDir)files\temp\RiverServerSingleDll\$(PlatformShortName)\</IntDir>
+    <OutDir>$(SolutionDir)files\single_dll\$(PlatformShortName)\</OutDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)leechcore;$(SolutionDir)includes;$(SolutionDir)leechagent;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='x64' and '$(UseCustomLlvmKernel)' != 'false'">
+    <LLVMInstallDir>C:\llvm\llvm_kernel\llvm-msvc-ex-2026-3-4-install</LLVMInstallDir>
+    <LLVMToolsVersion>777</LLVMToolsVersion>
+    <CLToolExe>clang-cl.exe</CLToolExe>
+    <CLToolPath>$(LLVMInstallDir)\bin\</CLToolPath>
+    <LinkToolExe>lld-link.exe</LinkToolExe>
+    <LinkToolPath>$(LLVMInstallDir)\bin\</LinkToolPath>
+    <LibToolExe>llvm-lib.exe</LibToolExe>
+    <LibToolPath>$(LLVMInstallDir)\bin\</LibToolPath>
+    <UseClangCl>true</UseClangCl>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <CompileAs>CompileAsC</CompileAs>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PreprocessorDefinitions>LEECHCORE_SINGLE_DLL;RIVER_ACTIVATION_BYPASS=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Rpcrt4.lib;Secur32.lib;Advapi32.lib;Shell32.lib;Setupapi.lib;Winusb.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ProgramDatabaseFile>$(OutDir)\$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <CompileAs>CompileAsC</CompileAs>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <PreprocessorDefinitions>LEECHCORE_SINGLE_DLL;RIVER_ACTIVATION_BYPASS=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>Rpcrt4.lib;Secur32.lib;Advapi32.lib;Shell32.lib;Setupapi.lib;Winusb.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ProgramDatabaseFile>$(OutDir)\$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <CompileAs>CompileAsC</CompileAs>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PreprocessorDefinitions>LEECHCORE_SINGLE_DLL;RIVER_ACTIVATION_BYPASS=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Rpcrt4.lib;Secur32.lib;Advapi32.lib;Shell32.lib;Setupapi.lib;Winusb.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ProgramDatabaseFile>$(OutDir)\$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <CompileAs>CompileAsC</CompileAs>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <PreprocessorDefinitions>LEECHCORE_SINGLE_DLL;RIVER_ACTIVATION_BYPASS=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions Condition="'$(UseCustomLlvmKernel)' != 'false'">-Wno-incompatible-function-pointer-types -mllvm -fla -mllvm -sub -mllvm -sub_loop=1 -mllvm -split -mllvm -split_num=3 -mllvm -bcf -mllvm -bcf_loop=1 -mllvm -bcf_prob=40 -mllvm -string-obfus -mllvm -const-obfus -mllvm -ind-call %(AdditionalOptions)</AdditionalOptions>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <ExceptionHandling>false</ExceptionHandling>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>Rpcrt4.lib;Secur32.lib;Advapi32.lib;Shell32.lib;Setupapi.lib;Winusb.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ProgramDatabaseFile>$(OutDir)\$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="single_dll_main.c" />
+    <ClCompile Include="leechagent\river_activation.c" />
+    <ClCompile Include="leechagent\leechagent.c" />
+    <ClCompile Include="leechagent\leechagent_procchild.c" />
+    <ClCompile Include="leechagent\leechagent_procparent.c" />
+    <ClCompile Include="leechagent\leechagent_rpc.c" />
+    <ClCompile Include="leechagent\leechagent_svc.c" />
+    <ClCompile Include="leechagent\leechrpcserver.c" />
+    <ClCompile Include="leechagent\leechrpcshared.c" />
+    <ClCompile Include="leechagent\leechrpc_s.c">
+      <ExcludedFromBuild Condition="'$(LEECHRPC_ENABLE_NATIVE_RPC)'!='1'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="leechagent\util.c">
+      <ObjectFileName>$(IntDir)\leechagent_util.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="leechcore\device_pmem.c" />
+    <ClCompile Include="leechcore\leechcore.c" />
+    <ClCompile Include="leechcore\memmap.c" />
+    <ClCompile Include="leechcore\ob\ob_bytequeue.c" />
+    <ClCompile Include="leechcore\ob\ob_core.c" />
+    <ClCompile Include="leechcore\ob\ob_map.c" />
+    <ClCompile Include="leechcore\ob\ob_set.c" />
+    <ClCompile Include="leechcore\oscompatibility.c" />
+    <ClCompile Include="leechcore\util.c">
+      <ObjectFileName>$(IntDir)\leechcore_util.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="leechagent\river_activation.h" />
+    <ClInclude Include="leechagent\leechagent.h" />
+    <ClInclude Include="leechagent\leechagent_proc.h" />
+    <ClInclude Include="leechagent\leechagent_rpc.h" />
+    <ClInclude Include="leechagent\leechagent_svc.h" />
+    <ClInclude Include="leechagent\leechrpc.h" />
+    <ClInclude Include="leechagent\leechrpc_h.h" />
+    <ClInclude Include="leechagent\util.h" />
+    <ClInclude Include="leechagent\version.h" />
+    <ClInclude Include="leechcore\leechcore.h" />
+    <ClInclude Include="leechcore\leechcore_device.h" />
+    <ClInclude Include="leechcore\leechcore_internal.h" />
+    <ClInclude Include="leechcore\leechgrpc.h" />
+    <ClInclude Include="leechcore\leechrpc.h" />
+    <ClInclude Include="leechcore\ob\ob.h" />
+    <ClInclude Include="leechcore\oscompatibility.h" />
+    <ClInclude Include="leechcore\util.h" />
+    <ClInclude Include="leechcore\version.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
+
+

@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <LLVMInstallDir>C:\llvm\ollvm-16</LLVMInstallDir>
+    <LLVMToolsVersion>16.0.6</LLVMToolsVersion>
+    <ExecutablePath>$(LLVMInstallDir)\bin;$(VC_ExecutablePath_x86);$(CommonExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+</Project>
